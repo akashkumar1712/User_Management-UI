@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import UsersService from '../service/UsersService'; // ⬅️ Import this
 import './AuthPage.css';
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate(); // ⬅️ Hook
 
   const [loginData, setLoginData] = useState({
     email: '',
@@ -27,14 +30,55 @@ function AuthPage() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isLogin) {
-      console.log("Logging in with", loginData);
-    } else {
-      console.log("Registering with", registerData);
+    try {
+      if (isLogin) {
+        // Correct argument usage
+        const response = await UsersService.login(loginData.email, loginData.password);
+        const token = response.token;
+        const role = response.role; // if backend returns this
+  
+        localStorage.setItem('token', token);
+        if (role) localStorage.setItem('role', role); // optional
+        navigate('/profile');
+      } else {
+        // Registration requires a token if your backend needs it (ADMIN maybe?)
+        //const adminToken = localStorage.getItem('token') || ''; // or skip if not needed
+        const response = await UsersService.register(registerData);
+        //const token = response.token;
+        const role = response.role;
+  
+        //localStorage.setItem('token', token);
+        if (role) localStorage.setItem('role', role);
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('Auth error:', error);
+      alert('Authentication failed. Please check credentials.');
     }
+
+
+  //   try {
+  //     const response = await UsersService.login(loginData.email, loginData.password);
+  //     console.log("Login response:", response); // DEBUG THIS
+    
+  //     const token = response.token;
+  //     if (!token) {
+  //       alert("Login failed: Token missing");
+  //       return;
+  //     }
+    
+  //     localStorage.setItem('token', token);
+  //     navigate('/profile');
+  //   } catch (err) {
+  //     console.error("Login error:", err);
+  //     alert("Login failed. Check credentials.");
+  //   }
+    
   };
+
+  
 
   return (
     <div className="auth-wrapper">
@@ -42,18 +86,10 @@ function AuthPage() {
         <h2 style={{ textAlign: "center", color: "green" }}>Welcome To Exam Portal</h2>
 
         <div className="auth-toggle">
-          <button
-            type="button"
-            className={isLogin ? "active" : ""}
-            onClick={() => setIsLogin(true)}
-          >
+          <button type="button" className={isLogin ? "active" : ""} onClick={() => setIsLogin(true)}>
             Login
           </button>
-          <button
-            type="button"
-            className={!isLogin ? "active" : ""}
-            onClick={() => setIsLogin(false)}
-          >
+          <button type="button" className={!isLogin ? "active" : ""} onClick={() => setIsLogin(false)}>
             Register
           </button>
         </div>
@@ -62,60 +98,16 @@ function AuthPage() {
           <form className="auth-form" onSubmit={handleSubmit}>
             {!isLogin && (
               <>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  name="name"
-                  value={registerData.name}
-                  onChange={handleInputChange}
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Mobile"
-                  name="mobile"
-                  value={registerData.mobile}
-                  onChange={handleInputChange}
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Role"
-                  name="role"
-                  value={registerData.role}
-                  onChange={handleInputChange}
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="City"
-                  name="city"
-                  value={registerData.city}
-                  onChange={handleInputChange}
-                  required
-                />
+                <input type="text" placeholder="Name" name="name" value={registerData.name} onChange={handleInputChange} required />
+                <input type="text" placeholder="Mobile" name="mobile" value={registerData.mobile} onChange={handleInputChange} required />
+                <input type="text" placeholder="Role" name="role" value={registerData.role} onChange={handleInputChange} required />
+                <input type="text" placeholder="City" name="city" value={registerData.city} onChange={handleInputChange} required />
               </>
             )}
 
-            <input
-              type="email"
-              placeholder="youremail@email.com"
-              name="email"
-              value={isLogin ? loginData.email : registerData.email}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="password"
-              placeholder="password"
-              name="password"
-              value={isLogin ? loginData.password : registerData.password}
-              onChange={handleInputChange}
-              required
-            />
-            <button type="submit">
-              {isLogin ? "Login" : "Register"}
-            </button>
+            <input type="email" placeholder="youremail@email.com" name="email" value={isLogin ? loginData.email : registerData.email} onChange={handleInputChange} required />
+            <input type="password" placeholder="password" name="password" value={isLogin ? loginData.password : registerData.password} onChange={handleInputChange} required />
+            <button type="submit">{isLogin ? "Login" : "Register"}</button>
           </form>
         </div>
       </div>

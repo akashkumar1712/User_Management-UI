@@ -13,17 +13,26 @@ class UsersService{
         }
     }
 
-    static async register(userData, token){
-        try{
-            const response = await axios.post(`${UsersService.BASE_URL}/auth/register`, userData, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
-            return response.data;
-        }catch(err){
-            throw err;
+    // static async register(userData, token){
+    //     try{
+    //         const response = await axios.post(`${UsersService.BASE_URL}/auth/register`, userData, 
+    //         {
+    //             headers: {Authorization: `Bearer ${token}`}
+    //         })
+    //         return response.data;
+    //     }catch(err) {
+    //         throw err;
+    //     }
+    // }
+
+    static async register(userData) {
+        try {
+          const response = await axios.post(`${UsersService.BASE_URL}/auth/register`, userData);
+          return response.data;
+        } catch (err) {
+          throw err;
         }
-    }
+      }
 
     static async getAllUsers(token){
         try{
@@ -40,7 +49,7 @@ class UsersService{
 
     static async getYourProfile(token){
         try{
-            const response = await axios.get(`${UsersService.BASE_URL}/adminUser/get-profile`, 
+            const response = await axios.get(`${UsersService.BASE_URL}/adminuser/get-profile`, 
             {
                 headers: {Authorization: `Bearer ${token}`}
             })

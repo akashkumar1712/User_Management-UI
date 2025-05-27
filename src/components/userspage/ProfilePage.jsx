@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import UsersService from '../service/UsersService';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import UsersService from '../service/UsersService';
 
 
 
@@ -29,7 +29,7 @@ function ProfilePage() {
             <p>Email: {profileInfo.email}</p>
             <p>City: {profileInfo.city}</p>
             {profileInfo.role === "ADMIN" && (
-                <button><Link to={`/update-user/${profileInfo.id}`}>Update This Profile</Link></button>
+                <button><Link to={`/admin/update/${profileInfo.id}`}>Update This Profile</Link></button>
             )}
         </div>
     );

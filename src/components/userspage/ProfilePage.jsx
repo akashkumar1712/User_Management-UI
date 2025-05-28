@@ -16,7 +16,7 @@ function ProfilePage() {
 
             const token = localStorage.getItem('token'); // Retrieve the token from localStorage
             const response = await UsersService.getYourProfile(token);
-            setProfileInfo(response.ourUsers);
+            setProfileInfo(response);
         } catch (error) {
             console.error('Error fetching profile information:', error);
         }

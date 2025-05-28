@@ -1,70 +1,58 @@
-import React from 'react';
-import './Contact.css';
+import React from "react"
+import Back from "../common/back/Back"
+import "./Contact.css"
 
 const Contact = () => {
   return (
-    <div className="about-us-container">
-      <header className="about-header">
-        <h1>Welcome to ExamPro</h1>
-        <p>Your Trusted Online Examination Platform</p>
-      </header>
+    <>
+      <Back title='Contact us' />
+      <section className='contacts padding'>
+        <div className='container shadow flexSB'>
+          <div className='left row'>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d904726.6131739549!2d85.24565535!3d27.65273865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1652535615693!5m2!1sen!2snp"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
 
-      <section className="mission-section">
-        <h2>Our Mission</h2>
-        <p>To provide a secure, reliable, and user-friendly online examination platform that empowers educational institutions and organizations to conduct assessments efficiently while ensuring academic integrity.</p>
-      </section>
+          <div className='right row'>
+            <h1>Contact us</h1>
+            <p>We're open for any suggestion or just to have a chat</p>
 
-      <section className="features-section">
-        <h2>Platform Features</h2>
-        <div className="features-grid">
-          <div className="feature-card">
-            <h3>Secure Authentication</h3>
-            <p>Advanced security measures with Spring Security integration to protect user data and exam integrity.</p>
-          </div>
-          <div className="feature-card">
-            <h3>Real-time Assessment</h3>
-            <p>Instant evaluation and feedback system powered by our robust React.js frontend.</p>
-          </div>
-          <div className="feature-card">
-            <h3>Data Protection</h3>
-            <p>Reliable data storage and management using MySQL Workbench with regular backups.</p>
-          </div>
-          <div className="feature-card">
-            <h3>Analytics Dashboard</h3>
-            <p>Comprehensive reporting and analytics for performance tracking and insights.</p>
+            <div className='items grid2'>
+              <div className='box'>
+                <h4>ADDRESS:</h4>
+                <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+              </div>
+              <div className='box'>
+                <h4>EMAIL:</h4>
+                <p>info@yoursite.com</p>
+              </div>
+              <div className='box'>
+                <h4>PHONE:</h4>
+                <p>+1235 2355 98</p>
+              </div>
+            </div>
+
+            <form action=''>
+              <div className='flexSB'>
+                <input type='text' placeholder='Name' />
+                <input type='email' placeholder='Email' />
+              </div>
+              <input type='text' placeholder='Subject' />
+              <textarea rows='10' placeholder="Create a message here..."></textarea>
+              <button className='primary-btn'>SEND MESSAGE</button>
+            </form>
+
+            <h3>Follow us here</h3>
+            <span>FACEBOOK TWITTER INSTAGRAM DRIBBBLE</span>
           </div>
         </div>
       </section>
+    </>
+  )
+}
 
-      <section className="tech-stack-section">
-        <h2>Our Technology Stack</h2>
-        <div className="tech-stack-grid">
-          <div className="tech-item">
-            <h3>Frontend</h3>
-            <p>React.js</p>
-          </div>
-          <div className="tech-item">
-            <h3>Backend</h3>
-            <p>Java Spring Boot</p>
-          </div>
-          <div className="tech-item">
-            <h3>Database</h3>
-            <p>MySQL</p>
-          </div>
-          <div className="tech-item">
-            <h3>Security</h3>
-            <p>Spring Security</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="contact-section">
-        <h2>Get in Touch</h2>
-        <p>Have questions about our platform? We're here to help!</p>
-        <button className="contact-button">Contact Us</button>
-      </section>
-    </div>
-  );
-};
-
-export default Contact;
+export default Contact

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import About from './components/about/About';
 import AuthPage from './components/auth/AuthPage';
-import FooterComponent from './components/common/Footer';
+//import FooterComponent from './components/common/Footer';
 import Navbar from './components/common/Navbar';
 import UsersService from './components/service/UsersService';
 import ProfilePage from './components/userspage/ProfilePage';
@@ -41,7 +41,7 @@ function Layout() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
-      <FooterComponent />
+      {/* <FooterComponent /> */}
     </>
   );
 }

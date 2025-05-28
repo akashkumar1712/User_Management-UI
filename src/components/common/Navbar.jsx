@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UsersService from '../service/UsersService';
+import Logo from "../common/Logo";
 //import './Navbar.css'; // Optional: your custom styling
 
 function Navbar() {
@@ -20,7 +21,6 @@ function Navbar() {
     <nav className="navbar">
       <ul className="navbar-links">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
         <li><Link to="/team">Team</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to="/about">About</Link></li>

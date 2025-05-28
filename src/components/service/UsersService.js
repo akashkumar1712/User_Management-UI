@@ -3,14 +3,34 @@ import axios from "axios";
 class UsersService{
     static BASE_URL = "http://localhost:1010"
 
-    static async login(email, password){
-        try{
-            const response = await axios.post(`${UsersService.BASE_URL}/auth/login`, {email, password})
-            return response.data;
+    // static async login(email, password){
+    //     try{
+    //         const response = await axios.post(`${UsersService.BASE_URL}/auth/login`, {email, password})
+    //         return response.data;
 
-        }catch(err){
-            throw err;
-        }
+    //     }catch(err){
+    //         throw err;
+    //     }
+    // }
+
+    static async login(email, password) {
+        try {
+          const response = await axios.post(`${UsersService.BASE_URL}/auth/login`, {
+            email,
+            password,
+          });
+    
+          // ✅ Check for HTTP status code 200
+          if (response.data.statusCode === 200) {
+            return response.data.data; // Continue login flow
+          } else {
+            throw new Error("Login failed. Please try again.");
+          }
+    
+        }catch (error) {
+            console.error('Auth error:', error.response?.data || error.message);
+            alert('Authentication failed. Please check credentials.');
+          }
     }
 
     // static async register(userData, token){
@@ -28,7 +48,7 @@ class UsersService{
     static async register(userData) {
         try {
           const response = await axios.post(`${UsersService.BASE_URL}/auth/register`, userData);
-          return response.data;
+          return response.data.data;
         } catch (err) {
           throw err;
         }
@@ -40,7 +60,7 @@ class UsersService{
             {
                 headers: {Authorization: `Bearer ${token}`}
             })
-            return response.data;
+            return response.data.data;
         }catch(err){
             throw err;
         }
@@ -53,7 +73,7 @@ class UsersService{
             {
                 headers: {Authorization: `Bearer ${token}`}
             })
-            return response.data;
+            return response.data.data;
         }catch(err){
             throw err;
         }
@@ -65,7 +85,7 @@ class UsersService{
             {
                 headers: {Authorization: `Bearer ${token}`}
             })
-            return response.data;
+            return response.data.data;
         }catch(err){
             throw err;
         }
@@ -77,7 +97,7 @@ class UsersService{
             {
                 headers: {Authorization: `Bearer ${token}`}
             })
-            return response.data;
+            return response.data.data;
         }catch(err){
             throw err;
         }
@@ -90,7 +110,7 @@ class UsersService{
             {
                 headers: {Authorization: `Bearer ${token}`}
             })
-            return response.data;
+            return response.data.data;
         }catch(err){
             throw err;
         }

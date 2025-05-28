@@ -1,70 +1,61 @@
-import React from 'react';
-import './Team.css';
+import React, { useState } from "react";
+import "./Team.css";
 
-const Team = () => {
+const teamMembers = [
+  {
+    name: "Akash Kumar Singh",
+    role: "Full Stack Developer, Co-founder",
+    image: "/images/pic.jpg",
+  },
+  {
+    name: "Amit Saini",
+    role: "Frontend Developer, Partner",
+    image: "/images/pic.jpg",
+  },
+  // Add more members if needed
+];
+
+export default function Team() {
+  const [startIndex, setStartIndex] = useState(0);
+
+  const handlePrev = () => {
+    setStartIndex((prev) => (prev - 1 + teamMembers.length) % teamMembers.length);
+  };
+
+  const handleNext = () => {
+    setStartIndex((prev) => (prev + 1) % teamMembers.length);
+  };
+
+  const visibleMembers = teamMembers.slice(startIndex, startIndex + 2);
+
   return (
-    <div className="about-us-container">
-      <header className="about-header">
-        <h1>Welcome to ExamPro</h1>
-        <p>Your Trusted Online Examination Platform</p>
-      </header>
-
-      <section className="mission-section">
-        <h2>Our Mission</h2>
-        <p>To provide a secure, reliable, and user-friendly online examination platform that empowers educational institutions and organizations to conduct assessments efficiently while ensuring academic integrity.</p>
-      </section>
-
-      <section className="features-section">
-        <h2>Platform Features</h2>
-        <div className="features-grid">
-          <div className="feature-card">
-            <h3>Secure Authentication</h3>
-            <p>Advanced security measures with Spring Security integration to protect user data and exam integrity.</p>
-          </div>
-          <div className="feature-card">
-            <h3>Real-time Assessment</h3>
-            <p>Instant evaluation and feedback system powered by our robust React.js frontend.</p>
-          </div>
-          <div className="feature-card">
-            <h3>Data Protection</h3>
-            <p>Reliable data storage and management using MySQL Workbench with regular backups.</p>
-          </div>
-          <div className="feature-card">
-            <h3>Analytics Dashboard</h3>
-            <p>Comprehensive reporting and analytics for performance tracking and insights.</p>
-          </div>
+    <div className="team-wrapper">
+      <div className="team-container">
+        {/* Left Text */}
+        <div className="quote-box">
+          <p className="quote-text">
+            Together, we cover <br />
+            a comprehensive <br />
+            design spectrum <br />
+            and have a wide <br />
+            range of <br />
+            competences
+          </p>
         </div>
-      </section>
 
-      <section className="tech-stack-section">
-        <h2>Our Technology Stack</h2>
-        <div className="tech-stack-grid">
-          <div className="tech-item">
-            <h3>Frontend</h3>
-            <p>React.js</p>
-          </div>
-          <div className="tech-item">
-            <h3>Backend</h3>
-            <p>Java Spring Boot</p>
-          </div>
-          <div className="tech-item">
-            <h3>Database</h3>
-            <p>MySQL</p>
-          </div>
-          <div className="tech-item">
-            <h3>Security</h3>
-            <p>Spring Security</p>
-          </div>
+        {/* Right Carousel */}
+        <div className="carousel">
+          <button className="nav-button left" onClick={handlePrev}>&#10094;</button>
+          {visibleMembers.map((member, idx) => (
+            <div key={idx} className="card">
+              <img src={member.image} alt={member.name} className="avatar" />
+              <h3>{member.name}</h3>
+              <p>{member.role}</p>
+            </div>
+          ))}
+          <button className="nav-button right" onClick={handleNext}>&#10095;</button>
         </div>
-      </section>
-
-      <section className="contact-section">
-        <h2>Get in Touch</h2>
-        <p>Have questions about our platform? We're here to help!</p>
-        <button className="contact-button">Contact Us</button>
-      </section>
+      </div>
     </div>
   );
-};
-
-export default Team;
+}

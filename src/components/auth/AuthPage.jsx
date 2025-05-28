@@ -4,7 +4,7 @@ import UsersService from '../service/UsersService'; // ⬅️ Import this
 import './AuthPage.css';
 
 function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate(); // ⬅️ Hook
 
   const [loginData, setLoginData] = useState({
@@ -34,24 +34,34 @@ function AuthPage() {
     e.preventDefault();
     try {
       if (isLogin) {
+        //console.log("Reached request");
         // Correct argument usage
-        const response = await UsersService.login(loginData.email, loginData.password);
-        const token = response.token;
-        const role = response.role; // if backend returns this
+        const data = await UsersService.login(loginData.email, loginData.password);
+        if (!data) {
+          alert('Login failed: token missing');
+          return;
+        }
+        //console.log("Reached response");
+        //const token = response.token;
+        //const role = response.role; // if backend returns this
   
-        localStorage.setItem('token', token);
-        if (role) localStorage.setItem('role', role); // optional
+        localStorage.setItem('token', data.token);
+        if (data.role) localStorage.setItem('role', data.role); // optional
         navigate('/profile');
       } else {
         // Registration requires a token if your backend needs it (ADMIN maybe?)
         //const adminToken = localStorage.getItem('token') || ''; // or skip if not needed
-        const response = await UsersService.register(registerData);
-        //const token = response.token;
-        const role = response.role;
+        // const response = await UsersService.register(registerData);
+        await UsersService.register(registerData);
+        
+        //const role = response.role;
   
         //localStorage.setItem('token', token);
-        if (role) localStorage.setItem('role', role);
-        navigate('/login');
+        alert('Registration successful! Please log in.');
+        setIsLogin(true); // ⬅️ This shows the login form
+        
+        //if (role) localStorage.setItem('role', role);
+        //navigate('/login');
       }
     } catch (error) {
       console.error('Auth error:', error);
@@ -100,7 +110,17 @@ function AuthPage() {
               <>
                 <input type="text" placeholder="Name" name="name" value={registerData.name} onChange={handleInputChange} required />
                 <input type="text" placeholder="Mobile" name="mobile" value={registerData.mobile} onChange={handleInputChange} required />
-                <input type="text" placeholder="Role" name="role" value={registerData.role} onChange={handleInputChange} required />
+                <select
+                  name="role"
+                  value={registerData.role}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="">Select Role</option>
+                  <option value="USER">USER</option>
+                  <option value="ADMIN">ADMIN</option>
+                </select>
+                {/* <input type="text" placeholder="Role" name="role" value={registerData.role} onChange={handleInputChange} required /> */}
                 <input type="text" placeholder="City" name="city" value={registerData.city} onChange={handleInputChange} required />
               </>
             )}

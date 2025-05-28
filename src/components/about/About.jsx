@@ -7,6 +7,11 @@ const About = () => {
       <header className="about-header">
         <h1>Welcome to ExamPro</h1>
         <p>Your Trusted Online Examination Platform</p>
+        <p>git status</p>
+        <p>git add .</p>
+        <p>Green colour</p>
+        <p>git commit -m "main: ur comment"</p>
+        <p>git push origin main</p>
       </header>
 
       <section className="mission-section">

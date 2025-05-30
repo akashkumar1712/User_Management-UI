@@ -56,7 +56,7 @@ function ResultPage() {
             if (data.result.creditsEarned !== undefined) {
               setUpdatedCredits(data.result.creditsEarned);
             }
-            alert('🎉 Congrats! You earned 1 coin as a reward!');
+            alert('🎉 Congrats! You earned 2 coin as a reward!');
           }
         } else {
           throw new Error(data.message || 'Submission failed');
@@ -103,15 +103,15 @@ function ResultPage() {
       <p><strong>Incorrect Answers:</strong> ❌ {incorrect}</p>
       <p><strong>Not Attempted:</strong> ⚪ {notAttempted}</p>
       <p><strong>Score Percentage:</strong> {percentage.toFixed(2)}%</p>
-      <p><strong>Credits Earned:</strong> {creditsEarned}</p>
+      {/* <p><strong>Credits Earned:</strong> {creditsEarned}</p> */}
 
-      {rewardGiven && <p style={{ color: 'green', fontWeight: 'bold' }}>🎉 You earned 1 coin in your wallet!</p>}
+      {rewardGiven && <p style={{ color: 'green', fontWeight: 'bold' }}>🎉 You earned 2 coin in your wallet!</p>}
 
-      {updatedCredits !== null && (
+      {/* {updatedCredits !== null && (
         <p style={{ color: 'blue', fontWeight: 'bold' }}>
           💰 Your updated credits: {updatedCredits}
         </p>
-      )}
+      )} */}
 
       <button onClick={() => navigate('/dashboard')} style={{ marginTop: 20, padding: '10px 20px' }}>
         Go Back to Dashboard

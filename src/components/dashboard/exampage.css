@@ -24,11 +24,12 @@
     font-weight: bold;
     font-size: 16px;
     user-select: none;
+    color: black;
   }
   
   .sidebar button.active {
     background-color: #007bff;
-    color: rgb(46, 27, 27);
+    color: white;
     border-color: #0056b3;
   }
   
@@ -41,19 +42,31 @@
     background-color: #f0f0f0;
     padding: 6px 12px;
     border-radius: 6px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     user-select: none;
+  }
+  
+  .blinking {
+    animation: blink 1s step-start 0s infinite;
+    background-color: #ffcccc !important;
+    color: #d00000 !important;
+    font-weight: bold;
+  }
+  
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
   }
   
   .question-buttons {
     margin-top: 20px;
     display: flex;
-    justify-content: flex-start; /* Align Next button left */
+    justify-content: flex-start;
     gap: 10px;
     width: 100%;
   }
   
-  /* Next small button styling */
   .next-small-btn {
     padding: 6px 12px;
     font-size: 14px;
@@ -72,7 +85,6 @@
     border-color: #0056b3;
   }
   
-  /* Submit button centered and smaller */
   .submit-btn {
     padding: 6px 16px;
     font-size: 14px;
@@ -85,12 +97,45 @@
     min-width: 120px;
     max-width: 250px;
     text-align: center;
-    margin: 0 auto; /* Center horizontally */
+    margin: 0 auto;
     display: block;
     transition: background-color 0.2s ease;
   }
   
   .submit-btn:hover {
-    background-color: #c7db1b;
+    background-color: #218838;
+  }
+  
+  /* Custom radio styles */
+  .custom-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .radio-letter {
+    width: 28px;
+    height: 28px;
+    border: 2px solid #666;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #666;
+    background-color: white;
+    transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .custom-radio:checked + label .radio-letter {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
   }
   

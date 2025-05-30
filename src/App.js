@@ -18,6 +18,7 @@ import Team from './components/team/Team';
 import ParentComponent from './components/userspage/ParentComponent';
 import StudyMaterialsPage from './components/dashboard/StudyMaterialsPage';
 import ExamPage from './components/dashboard/ExamPage';
+import ResultPage from './components/dashboard/ResultPage';  // <-- Import here
 import UsersService from './components/service/UsersService';
 
 function Layout() {
@@ -38,6 +39,7 @@ function Layout() {
           <Route path="/dashboard" element={<ParentComponent />} />
           <Route path="/materials/:subject/:type" element={<StudyMaterialsPage />} />
           <Route path="/exam/:type/:course" element={<ExamPage />} />
+          <Route path="/result" element={<ResultPage />} /> {/* <-- Add this */}
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<ProfilePage />} />
 

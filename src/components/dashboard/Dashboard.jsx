@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CourseService from '../service/CourseService';
+// import CourseService from '../service/CourseService';
 import './dashboard.css';
 
 function Dashboard({ profile }) {
   const navigate = useNavigate();
-  const [courses, setCourses] = useState([]);
+  // const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState('');
   const [examSubject, setExamSubject] = useState('');
   const [showProfile, setShowProfile] = useState(false);
@@ -13,6 +13,7 @@ function Dashboard({ profile }) {
   const name = profile?.name;
   const email = profile?.email;
   const role = profile?.role;
+  const credits = profile?.credits;
 
   const subjects = ['C', 'C++', 'Java'];
   const courseTypes = ['paid', 'free'];
@@ -23,16 +24,7 @@ function Dashboard({ profile }) {
       return;
     }
 
-    const fetchCourses = async () => {
-      try {
-        const data = await CourseService.getAllCourses();
-        setCourses(data);
-      } catch (err) {
-        console.error('Failed to load courses', err);
-      }
-    };
-
-    fetchCourses();
+    
   }, [navigate, name, email]);
 
   const handleLogout = () => {
@@ -64,6 +56,7 @@ function Dashboard({ profile }) {
               <p><strong>{name}</strong></p>
               <p>{email}</p>
               <p>Role: {role}</p>
+              <p>Credits: {credits}</p>
               <button className="logout-button" onClick={handleLogout}>🚪 Logout</button>
             </div>
           )}

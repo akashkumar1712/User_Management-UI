@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './exampage.css';
 
 function ExamPage() {
   const { type, course } = useParams();
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(null);
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState({}); // store selected option IDs here
   const [timer, setTimer] = useState(3600); // 1 hour in seconds
   const [submitted, setSubmitted] = useState(false);
 
@@ -19,7 +20,7 @@ function ExamPage() {
           setQuestions(data.data);
           setCurrentIndex(0);
         } else {
-          const fallback = Array.from({ length: 20 }, (_, i) => ({
+          const fallback = Array.from({ length: 50 }, (_, i) => ({
             id: i + 1,
             text: `Sample Question ${i + 1}`,
             options: [
@@ -34,7 +35,7 @@ function ExamPage() {
         }
       })
       .catch(err => {
-        const fallback = Array.from({ length: 20 }, (_, i) => ({
+        const fallback = Array.from({ length: 50 }, (_, i) => ({
           id: i + 1,
           text: `Sample Question ${i + 1}`,
           options: [
@@ -65,15 +66,37 @@ function ExamPage() {
     return () => clearInterval(interval);
   }, [submitted]);
 
-  const handleSelect = (qid, optionText) => {
-    setAnswers(prev => ({ ...prev, [qid]: optionText }));
+  // Store option ID on select instead of text
+  const handleSelect = (qid, optionId) => {
+    setAnswers(prev => ({ ...prev, [qid]: optionId }));
   };
 
   const handleSubmit = () => {
     if (submitted) return;
+    if (!window.confirm("Are you sure you want to submit the exam?")) return;
+
     setSubmitted(true);
-    alert('✅ Exam submitted successfully!');
-    console.log('Submitted Answers:', answers);
+
+    // Create payload with questionId and answerOptionId (option ID)
+    const payload = questions.map(q => ({
+      questionId: q.id,
+      answerOptionId: answers[q.id] || null,
+    }));
+
+    fetch('http://localhost:1010/api/exams/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ answers: payload }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        // Navigate with backend response + questions + user's answers
+        navigate('/result', { state: { result, questions, answers } });
+      })
+      .catch(() => {
+        alert('Failed to submit exam. Please try again.');
+        setSubmitted(false);
+      });
   };
 
   const currentQuestion = currentIndex !== null ? questions[currentIndex] : null;
@@ -98,8 +121,6 @@ function ExamPage() {
       </div>
 
       <div style={{ flex: 1, padding: '20px' }}>
-        {submitted && <div style={{ fontSize: '20px', color: 'green' }}>✅ Exam submitted successfully!</div>}
-
         {!submitted && currentQuestion && (
           <>
             <h3>{`Q${currentIndex + 1}: ${currentQuestion.text}`}</h3>
@@ -111,8 +132,8 @@ function ExamPage() {
                   id={`q${currentQuestion.id}_opt${idx}`}
                   name={`question_${currentQuestion.id}`}
                   className="custom-radio"
-                  checked={answers[currentQuestion.id] === opt.text}
-                  onChange={() => handleSelect(currentQuestion.id, opt.text)}
+                  checked={answers[currentQuestion.id] === opt.id}
+                  onChange={() => handleSelect(currentQuestion.id, opt.id)}
                 />
                 <label htmlFor={`q${currentQuestion.id}_opt${idx}`} style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                   <span className="radio-letter">{optionLetters[idx]}</span>

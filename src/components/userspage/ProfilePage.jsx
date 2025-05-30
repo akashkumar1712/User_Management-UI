@@ -28,6 +28,7 @@ function ProfilePage({ profileInfo }) {
       <p>Email: {profileInfo.email}</p>
       <p>City: {profileInfo.city}</p>
       <p>Role: {profileInfo.role}</p>
+      <p>Role: {profileInfo.credits}</p>
 
       {profileInfo.role === 'ADMIN' && (
         <>

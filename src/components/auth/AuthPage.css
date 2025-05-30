@@ -99,6 +99,48 @@ body {
   border-color: #fb8c00;
 }
 
+/* Password Input Wrapper */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding: 12px 40px 12px 16px; /* space for eye icon */
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.password-wrapper input:focus {
+  border-color: #fb8c00;
+}
+
+.password-wrapper button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  color: #555;
+  user-select: none;
+  transition: color 0.3s;
+}
+
+.password-wrapper button:hover {
+  color: #fb8c00;
+}
+
 /* Select Dropdown Styling */
 .auth-form select {
   width: 100%;

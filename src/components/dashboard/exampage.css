@@ -1,0 +1,96 @@
+.exam-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 80px;
+    padding: 10px;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sidebar button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: #f6f4f4;
+    border: 1px solid #231a1a;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    user-select: none;
+  }
+  
+  .sidebar button.active {
+    background-color: #007bff;
+    color: rgb(46, 27, 27);
+    border-color: #0056b3;
+  }
+  
+  .timer-box {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    user-select: none;
+  }
+  
+  .question-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start; /* Align Next button left */
+    gap: 10px;
+    width: 100%;
+  }
+  
+  /* Next small button styling */
+  .next-small-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    width: 80px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .next-small-btn:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  /* Submit button centered and smaller */
+  .submit-btn {
+    padding: 6px 16px;
+    font-size: 14px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    min-width: 120px;
+    max-width: 250px;
+    text-align: center;
+    margin: 0 auto; /* Center horizontally */
+    display: block;
+    transition: background-color 0.2s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #c7db1b;
+  }
+  

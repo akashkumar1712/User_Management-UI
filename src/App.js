@@ -1,47 +1,58 @@
 import React from 'react';
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation
+} from 'react-router-dom';
+
 import About from './components/about/About';
 import AuthPage from './components/auth/AuthPage';
-//import FooterComponent from './components/common/Footer';
 import Navbar from './components/common/Navbar';
-import UsersService from './components/service/UsersService';
 import ProfilePage from './components/userspage/ProfilePage';
 import UpdateUser from './components/userspage/UpdateUser';
 import UserManagementPage from './components/userspage/UserManagementPage';
-// Add your missing pages
-//import Contact from './components/Contact';
 import Contact from './components/contact/Contact';
 import Team from './components/team/Team';
+import ParentComponent from './components/userspage/ParentComponent';
+import StudyMaterialsPage from './components/dashboard/StudyMaterialsPage';
+import ExamPage from './components/dashboard/ExamPage';
+import UsersService from './components/service/UsersService';
 
 function Layout() {
   const location = useLocation();
-  const hideNavbarRoutes = ['/auth', '/exam'];
-
-  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+  const isAuthRoute = location.pathname === '/auth';
+  const isExamRoute = location.pathname.startsWith('/exam');
+  const shouldHideNavbar = isAuthRoute || isExamRoute;
+  const isAdmin = UsersService.adminOnly();
 
   return (
     <>
-      {/* <Header /> */}
       {!shouldHideNavbar && <Navbar />}
       <div className="content">
         <Routes>
-          {/* <Route exact path="/" element={<Home />} /> */}
           <Route path="/about" element={<About />} />
-          <Route path="/exam" element={<AuthPage />} /> {/* All exams will show login */}
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/team" element={<Team />} />
+          <Route path="/dashboard" element={<ParentComponent />} />
+          <Route path="/materials/:subject/:type" element={<StudyMaterialsPage />} />
+          <Route path="/exam/:type/:course" element={<ExamPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<ProfilePage />} />
-          {UsersService.adminOnly() && (
+
+          {isAdmin ? (
             <>
               <Route path="/admin/user-management" element={<UserManagementPage />} />
-              <Route path="/update-user/:userId" element={<UpdateUser />} />
+              <Route path="/admin/update/:userId" element={<UpdateUser />} />
             </>
+          ) : (
+            <Route path="/admin/*" element={<Navigate to="/auth" />} />
           )}
-          <Route path="*" element={<Navigate to="/" />} />
+
+          <Route path="*" element={<Navigate to="/auth" />} />
         </Routes>
       </div>
-      {/* <FooterComponent /> */}
     </>
   );
 }

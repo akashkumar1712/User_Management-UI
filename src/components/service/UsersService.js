@@ -1,6 +1,6 @@
 import axios from "axios";
 
-class UsersService{
+class UsersService {
     static BASE_URL = "http://localhost:1010"
 
     // static async login(email, password){
@@ -85,7 +85,7 @@ class UsersService{
             {
                 headers: {Authorization: `Bearer ${token}`}
             })
-            return response.data.data;
+            return response.data;
         }catch(err){
             throw err;
         }

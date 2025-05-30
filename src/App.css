@@ -1,0 +1,30 @@
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.1) 0,
+      rgba(255, 255, 255, 0.1) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+    box-shadow: inset 1px 1px 3px rgba(255, 255, 255, 0.1),
+                inset -1px -1px 3px rgba(0, 0, 0, 0.2),
+                0 3px 8px rgba(0, 123, 255, 0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    box-shadow: 0 0 10px #007bff, 0 0 20px #007bff;
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  

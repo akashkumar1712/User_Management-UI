@@ -4,12 +4,14 @@
   gap: 20px;
   align-items: stretch;
   padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
 }
 
 .contacts .left {
   flex: 1;
   min-width: 300px;
-  height: 350px; /* Shorter map */
+  height: 350px;
   display: flex;
   align-items: stretch;
 }
@@ -18,6 +20,7 @@
   width: 100%;
   height: 100%;
   border: none;
+  border-radius: 8px;
 }
 
 .contacts .right {
@@ -43,6 +46,9 @@
 
 .contacts .items {
   margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
 }
 
 .contacts .box p {
@@ -58,18 +64,20 @@
   outline: none;
   border: 1px solid grey;
   font-size: 14px;
+  border-radius: 5px;
 }
 
 .contacts textarea {
-  height: 80px; /* Reduced height */
+  height: 80px;
+  resize: none;
 }
 
-form .flexSB {
+.contacts .flexSB {
   display: flex;
   gap: 10px;
 }
 
-form .flexSB input {
+.contacts .flexSB input {
   flex: 1;
 }
 
@@ -83,6 +91,12 @@ form .flexSB input {
   font-weight: 600;
   margin-top: 5px;
   margin-bottom: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.contacts .primary-btn:hover {
+  background-color: #179d93;
 }
 
 .contacts h3 {

@@ -13,22 +13,22 @@ function Navbar() {
     const confirmLogout = window.confirm('Are you sure you want to logout?');
     if (confirmLogout) {
       UsersService.logout();
-      navigate('/auth'); // Redirect to login page after logout
+      navigate('/home'); // Redirect to login page after logout
     }
   };
 
   return (
     <nav className="navbar">
       <ul className="navbar-links">
-        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">Home</Link></li>
         <li><Link to="/team">Team</Link></li>
         <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/exam">All Exams</Link></li> {/* 👈 This is key */}
+        
+        <li><Link to="/auth">Exam</Link></li> {/* 👈 This is key */}
 
-        {isAuthenticated && <li><Link to="/profile">Profile</Link></li>}
+        {/* {isAuthenticated && <li><Link to="/profile">Profile</Link></li>} */}
         {isAdmin && <li><Link to="/admin/user-management">User Management</Link></li>}
-        {isAuthenticated && <li><button onClick={handleLogout}>Logout</button></li>}
+        {/* {isAuthenticated && <li><button onClick={handleLogout}>Logout</button></li>} */}
       </ul>
     </nav>
   );

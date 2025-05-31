@@ -46,34 +46,67 @@ function AuthPage() {
   };
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-container">
-        <h2 style={{ textAlign: 'center', color: 'green' }}>Welcome To Exam Portal</h2>
-        <div className="auth-toggle">
-          <button className={isLogin ? "active" : ""} onClick={() => setIsLogin(true)}>Login</button>
-          <button className={!isLogin ? "active" : ""} onClick={() => setIsLogin(false)}>Register</button>
+    <div className="auth-page">
+      {/* Left video section */}
+      <div className="auth-media">
+        <video autoPlay muted loop>
+          <source src="https://hrcdn.net/fcore/assets/onboarding/globe-5fdfa9a0f4.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="video-overlay-text">
+          <p>Empowering Your Exam Journey</p>
+          <p>Learn | Practice | Succeed</p>
         </div>
+      </div>
 
-        <form className="auth-form" onSubmit={handleSubmit}>
-          {!isLogin && (
-            <>
-              <input name="name" value={registerData.name} onChange={handleInputChange} placeholder="Name" required />
-              <input name="mobile" value={registerData.mobile} onChange={handleInputChange} placeholder="Mobile" required />
-              <select name="role" value={registerData.role} onChange={handleInputChange} required>
-                <option value="">Select Role</option>
-                <option value="USER">USER</option>
-                <option value="ADMIN">ADMIN</option>
-              </select>
-              <input name="city" value={registerData.city} onChange={handleInputChange} placeholder="City" required />
-            </>
-          )}
-          <input type="email" name="email" value={isLogin ? loginData.email : registerData.email} onChange={handleInputChange} placeholder="Email" required />
-          <div className="password-wrapper">
-            <input type={showPassword ? "text" : "password"} name="password" value={isLogin ? loginData.password : registerData.password} onChange={handleInputChange} placeholder="Password" required />
-            <button type="button" onClick={() => setShowPassword(!showPassword)}>{showPassword ? '🙈' : '👁️'}</button>
+      {/* Right auth form section */}
+      <div className="auth-wrapper">
+        <div className="auth-container">
+          <h2>Welcome To Exam Portal</h2>
+          <p className="subtitle">Login or Register to continue</p>
+
+          <div className="auth-toggle">
+            <button className={isLogin ? "active" : ""} onClick={() => setIsLogin(true)}>Login</button>
+            <button className={!isLogin ? "active" : ""} onClick={() => setIsLogin(false)}>Register</button>
           </div>
-          <button type="submit">{isLogin ? "Login" : "Register"}</button>
-        </form>
+
+          <form className="auth-form" onSubmit={handleSubmit}>
+            {!isLogin && (
+              <>
+                <input name="name" value={registerData.name} onChange={handleInputChange} placeholder="Name" required />
+                <input name="mobile" value={registerData.mobile} onChange={handleInputChange} placeholder="Mobile" required />
+                <select name="role" value={registerData.role} onChange={handleInputChange} required>
+                  <option value="">Select Role</option>
+                  <option value="USER">USER</option>
+                  <option value="ADMIN">ADMIN</option>
+                </select>
+                <input name="city" value={registerData.city} onChange={handleInputChange} placeholder="City" required />
+              </>
+            )}
+            <input
+              type="email"
+              name="email"
+              value={isLogin ? loginData.email : registerData.email}
+              onChange={handleInputChange}
+              placeholder="Email"
+              required
+            />
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={isLogin ? loginData.password : registerData.password}
+                onChange={handleInputChange}
+                placeholder="Password"
+                required
+              />
+              <button type="button" onClick={() => setShowPassword(!showPassword)} aria-label="Toggle password visibility">
+                {showPassword ? '🙈' : '👁️'}
+              </button>
+            </div>
+            <button type="submit">{isLogin ? "Login" : "Register"}</button>
+          </form>
+        </div>
       </div>
     </div>
   );

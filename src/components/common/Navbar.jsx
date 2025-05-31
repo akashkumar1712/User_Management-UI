@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UsersService from '../service/UsersService';
 import Logo from "../common/Logo";
-//import './Navbar.css'; // Optional: your custom styling
+import './Navbar.css'; // Optional: your custom styling
 
 function Navbar() {
   const isAuthenticated = UsersService.isAuthenticated();
@@ -21,13 +21,17 @@ function Navbar() {
     <nav className="navbar">
       <ul className="navbar-links">
         <li><Link to="/about">Home</Link></li>
-        <li><Link to="/team">Team</Link></li>
+        <li><Link to="/auth">Exam</Link></li>
         <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/team">Team</Link></li>
         
-        <li><Link to="/auth">Exam</Link></li> {/* 👈 This is key */}
+        
+        <div className="login-btn">
+            <a href="/auth">Login</a>
+        </div>
 
         {/* {isAuthenticated && <li><Link to="/profile">Profile</Link></li>} */}
-        {isAdmin && <li><Link to="/admin/user-management">User Management</Link></li>}
+        {/* {isAdmin && <li><Link to="/admin/user-management">User Management</Link></li>} */}
         {/* {isAuthenticated && <li><button onClick={handleLogout}>Logout</button></li>} */}
       </ul>
     </nav>

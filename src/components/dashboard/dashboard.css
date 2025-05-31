@@ -1,60 +1,179 @@
+/* Full-page background image */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35); /* dark overlay for readability */
+  z-index: -1;
+}
+
+/* Main dashboard card */
 .dashboard {
-    max-width: 600px;
-    margin: auto;
-    background: #f9f9f9;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  max-width: 850px;
+  margin: 40px auto;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px 50px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  color: #2c3e50;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  z-index: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.header h2 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #34495e;
+}
+
+.profile-wrapper {
+  position: relative;
+}
+
+.profile-button {
+  background-color: #2980b9;
+  color: white;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  font-weight: 600;
+}
+
+.profile-button:hover,
+.profile-button:focus {
+  background-color: #1c5980;
+  box-shadow: 0 0 10px rgba(41, 128, 185, 0.8);
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 54px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px 20px;
+  z-index: 10;
+  min-width: 240px;
+  text-align: left;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+  color: #34495e;
+  opacity: 0;
+  animation: fadeInDropdown 0.3s forwards;
+}
+
+.profile-dropdown p {
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+.logout-button {
+  margin-top: 12px;
+  padding: 8px 14px;
+  color: white;
+  background: #c0392b;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  width: 100%;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logout-button:hover {
+  background: #922b21;
+  box-shadow: 0 0 8px rgba(146, 43, 33, 0.8);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.section select {
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1.8px solid #bdc3c7;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease;
+  width: 100%;
+  max-width: 400px;
+}
+
+.section select:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 6px rgba(41, 128, 185, 0.3);
+}
+
+.section button {
+  margin-top: 10px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background-color: #2980b9;
+  color: white;
+  cursor: pointer;
+  max-width: 200px;
+  transition: background-color 0.3s ease;
+}
+
+.section button:hover {
+  background-color: #1c5980;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 30px 0;
+}
+
+@keyframes fadeInDropdown {
+  to {
+    opacity: 1;
   }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .profile-wrapper {
-    position: relative;
-  }
-  
-  .profile-button {
-    background-color: #007bff;
-    color: white;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .profile-dropdown {
-    position: absolute;
-    right: 0;
-    top: 50px;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    z-index: 10;
-    min-width: 200px;
-    text-align: left;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
-  }
-  
-  .logout-button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    color: white;
-    background: crimson;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .section {
-    margin-top: 25px;
-  }
-  
+}

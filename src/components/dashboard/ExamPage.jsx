@@ -7,8 +7,8 @@ function ExamPage() {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(null);
-  const [answers, setAnswers] = useState({}); // store selected option IDs here
-  const [timer, setTimer] = useState(3600); // 1 hour in seconds
+  const [answers, setAnswers] = useState({});
+  const [timer, setTimer] = useState(3600);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function ExamPage() {
           setCurrentIndex(0);
         }
       })
-      .catch(err => {
+      .catch(() => {
         const fallback = Array.from({ length: 50 }, (_, i) => ({
           id: i + 1,
           text: `Sample Question ${i + 1}`,
@@ -66,7 +66,6 @@ function ExamPage() {
     return () => clearInterval(interval);
   }, [submitted]);
 
-  // Store option ID on select instead of text
   const handleSelect = (qid, optionId) => {
     setAnswers(prev => ({ ...prev, [qid]: optionId }));
   };
@@ -77,7 +76,6 @@ function ExamPage() {
 
     setSubmitted(true);
 
-    // Create payload with questionId and answerOptionId (option ID)
     const payload = questions.map(q => ({
       questionId: q.id,
       answerOptionId: answers[q.id] || null,
@@ -90,7 +88,6 @@ function ExamPage() {
     })
       .then(res => res.json())
       .then(result => {
-        // Navigate with backend response + questions + user's answers
         navigate('/result', { state: { result, questions, answers } });
       })
       .catch(() => {
@@ -104,8 +101,14 @@ function ExamPage() {
 
   return (
     <div className="exam-container">
-      <div className={`timer-box ${timer <= 300 ? 'blinking' : ''}`}>
-        ⏳ {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
+      <div className="top-bar">
+        <button className="submit-btn" onClick={handleSubmit} disabled={submitted}>
+          Submit Exam
+        </button>
+
+        <div className={`timer-box ${timer <= 300 ? 'blinking' : ''}`}>
+          ⏳ {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
+        </div>
       </div>
 
       <div className="sidebar">
@@ -120,13 +123,13 @@ function ExamPage() {
         ))}
       </div>
 
-      <div style={{ flex: 1, padding: '20px' }}>
+      <div className="question-box">
         {!submitted && currentQuestion && (
           <>
             <h3>{`Q${currentIndex + 1}: ${currentQuestion.text}`}</h3>
 
             {currentQuestion.options.map((opt, idx) => (
-              <div key={opt.id || idx} style={{ margin: '10px 0', display: 'flex', alignItems: 'center' }}>
+              <div key={opt.id || idx} className="option-row">
                 <input
                   type="radio"
                   id={`q${currentQuestion.id}_opt${idx}`}
@@ -135,9 +138,9 @@ function ExamPage() {
                   checked={answers[currentQuestion.id] === opt.id}
                   onChange={() => handleSelect(currentQuestion.id, opt.id)}
                 />
-                <label htmlFor={`q${currentQuestion.id}_opt${idx}`} style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                <label htmlFor={`q${currentQuestion.id}_opt${idx}`} className="option-label">
                   <span className="radio-letter">{optionLetters[idx]}</span>
-                  <span style={{ marginLeft: '5px' }}>{opt.text}</span>
+                  <span>{opt.text}</span>
                 </label>
               </div>
             ))}

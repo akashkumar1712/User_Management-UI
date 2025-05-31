@@ -1,13 +1,43 @@
+/* Add background image and overlay */
 .about-us-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   font-family: 'Poppins', sans-serif;
-  background-color: rgba(255, 255, 255, 0.95);
+
+  /* Background Image */
+  background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Overlay with a semi-transparent white layer for readability */
+  position: relative;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  color: #333; /* darker text to contrast */
+  overflow: hidden;
 }
 
+/* Overlay layer */
+.about-us-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  z-index: 0;
+}
+
+/* Ensure content inside is above overlay */
+.about-us-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Rest of your existing styles below */
+
+/* Header */
 .about-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -32,7 +62,7 @@
   overflow: hidden;
   position: relative;
   white-space: nowrap;
-  height: 1.5em; /* fixed height since content is empty */
+  height: 1.5em;
   margin: 0 auto;
   max-width: 400px;
 }

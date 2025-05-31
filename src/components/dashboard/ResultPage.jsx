@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import './ResultPage.css';
 
 function ResultPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Expect userId also passed in location.state from previous page
   const { questions = [], answers = {}, userId } = location.state || {};
 
   const [loading, setLoading] = useState(true);
@@ -17,14 +17,13 @@ function ResultPage() {
   useEffect(() => {
     const emailId = localStorage.getItem('email');
     if (!questions.length || !emailId) {
-        alert('Email Id is not present')
+      alert('Email Id is not present');
       setLoading(false);
       return;
     }
 
-    
     const payload = {
-      emailId,  // include userId here
+      emailId,
       answers: questions.map(q => ({
         questionId: q.id,
         answerOptionId: answers[q.id] || null,
@@ -32,7 +31,6 @@ function ResultPage() {
     };
 
     const token = localStorage.getItem('authToken');
-    
 
     fetch('http://localhost:1010/api/exams/submit', {
       method: 'POST',
@@ -68,13 +66,13 @@ function ResultPage() {
       });
   }, [questions, answers, userId]);
 
-  if (loading) return <div style={{ padding: 40, textAlign: 'center' }}>Loading results...</div>;
+  if (loading) return <div style={{ padding: 40, textAlign: 'center', color: '#fff' }}>Loading results...</div>;
 
   if (error) {
     return (
-      <div style={{ padding: 40, textAlign: 'center', color: 'red' }}>
+      <div className="result-container">
         <h2>Error: {error}</h2>
-        <button onClick={() => navigate('/dashboard')} style={{ marginTop: 20, padding: '10px 20px' }}>
+        <button onClick={() => navigate('/dashboard')} className="dashboard-btn">
           Go Back to Dashboard
         </button>
       </div>
@@ -83,19 +81,19 @@ function ResultPage() {
 
   if (!resultData) {
     return (
-      <div style={{ padding: 40, textAlign: 'center' }}>
+      <div className="result-container">
         <h2>No result data found.</h2>
-        <button onClick={() => navigate('/dashboard')} style={{ marginTop: 20, padding: '10px 20px' }}>
+        <button onClick={() => navigate('/dashboard')} className="dashboard-btn">
           Go to Dashboard
         </button>
       </div>
     );
   }
 
-  const { total, correct, incorrect, notAttempted, percentage, creditsEarned } = resultData;
+  const { total, correct, incorrect, notAttempted, percentage } = resultData;
 
   return (
-    <div style={{ padding: 40, textAlign: 'center' }}>
+    <div className="result-container">
       <h1>✅ Exam Submitted Successfully!</h1>
       <h2>📊 Your Result</h2>
       <p><strong>Total Questions:</strong> {total}</p>
@@ -103,17 +101,14 @@ function ResultPage() {
       <p><strong>Incorrect Answers:</strong> ❌ {incorrect}</p>
       <p><strong>Not Attempted:</strong> ⚪ {notAttempted}</p>
       <p><strong>Score Percentage:</strong> {percentage.toFixed(2)}%</p>
-      {/* <p><strong>Credits Earned:</strong> {creditsEarned}</p> */}
 
-      {rewardGiven && <p style={{ color: 'green', fontWeight: 'bold' }}>🎉 You earned 2 coin in your wallet!</p>}
-
-      {/* {updatedCredits !== null && (
-        <p style={{ color: 'blue', fontWeight: 'bold' }}>
-          💰 Your updated credits: {updatedCredits}
+      {rewardGiven && (
+        <p style={{ color: 'lime', fontWeight: 'bold' }}>
+          🎉 You earned 2 coin in your wallet!
         </p>
-      )} */}
+      )}
 
-      <button onClick={() => navigate('/dashboard')} style={{ marginTop: 20, padding: '10px 20px' }}>
+      <button onClick={() => navigate('/dashboard')} className="dashboard-btn">
         Go Back to Dashboard
       </button>
     </div>

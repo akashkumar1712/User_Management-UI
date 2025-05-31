@@ -12,25 +12,69 @@ body {
   overflow-x: hidden;
 }
 
-/* Main Wrapper */
-.auth-wrapper {
+/* ---------- 2-Column Layout ---------- */
+.auth-page {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+/* Left Video/Image Section */
+.auth-page .auth-media {
+  flex: 60%;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.auth-page .auth-media video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+/* Text Overlay on Video */
+.auth-page .video-overlay-text {
+  position: absolute;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  text-align: center;
   padding: 20px;
-  background: #f0f2f5;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.auth-page .video-overlay-text p {
+  color: white !important;
+  margin: 0 0 10px 0;
+}
+
+/* Right Auth Form Section */
+.auth-page .auth-wrapper {
+  flex: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #000; /* Black background behind the form */
 }
 
 /* Container Box */
 .auth-container {
-  background: white;
+  background: white; /* Form stays white */
   padding: 40px 25px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
-  overflow: hidden;
 }
 
 /* Header Styles */
@@ -77,13 +121,9 @@ body {
   box-shadow: 0 4px 10px rgba(251, 140, 0, 0.3);
 }
 
-/* Form Slider Animation */
-.form-slider {
-  transition: all 0.3s ease-in-out;
-}
-
 /* Input Fields */
-.auth-form input {
+.auth-form input,
+.auth-form select {
   width: 100%;
   padding: 12px 16px;
   margin-bottom: 16px;
@@ -95,11 +135,12 @@ body {
   transition: border-color 0.3s;
 }
 
-.auth-form input:focus {
+.auth-form input:focus,
+.auth-form select:focus {
   border-color: #fb8c00;
 }
 
-/* Password Input Wrapper */
+/* Password Wrapper */
 .password-wrapper {
   position: relative;
   width: 100%;
@@ -108,18 +149,9 @@ body {
 
 .password-wrapper input {
   width: 100%;
-  padding: 12px 40px 12px 16px; /* space for eye icon */
-  border-radius: 30px;
-  border: 1px solid #ccc;
-  background-color: #f5f5f5;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.3s;
+  padding-right: 40px; /* Space for the toggle button */
+  height: 40px;
   box-sizing: border-box;
-}
-
-.password-wrapper input:focus {
-  border-color: #fb8c00;
 }
 
 .password-wrapper button {
@@ -130,37 +162,20 @@ body {
   border: none;
   background: transparent;
   cursor: pointer;
-  font-size: 18px;
-  padding: 0;
+  font-size: 20px;
   color: #555;
-  user-select: none;
+  padding: 0;
+  line-height: 1;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color 0.3s;
 }
 
 .password-wrapper button:hover {
   color: #fb8c00;
-}
-
-/* Select Dropdown Styling */
-.auth-form select {
-  width: 100%;
-  padding: 12px 16px;
-  margin-bottom: 16px;
-  border-radius: 30px;
-  border: 1px solid #ccc;
-  background-color: #f5f5f5;
-  font-size: 14px;
-  outline: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23666' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  background-size: 16px;
-  transition: border-color 0.3s;
-}
-
-.auth-form select:focus {
-  border-color: #fb8c00;
 }
 
 /* Submit Button */
@@ -175,25 +190,25 @@ body {
   cursor: pointer;
   font-size: 16px;
   transition: background 0.3s;
-  margin-top: 10px;
 }
 
 .auth-form button[type="submit"]:hover {
   background: linear-gradient(to right, #fb8c00, #f57c00);
 }
 
-/* Error Message */
-.error-message {
-  color: red;
-  font-size: 13px;
-  text-align: center;
-  margin-bottom: 10px;
-}
+/* Responsive */
+@media (max-width: 768px) {
+  .auth-page {
+    flex-direction: column;
+  }
 
-/* Responsive Design */
-@media (max-width: 480px) {
-  .auth-container {
-    padding: 30px 20px;
-    margin: 10px;
+  .auth-page .auth-media {
+    flex: none;
+    height: 250px;
+  }
+
+  .auth-page .auth-wrapper {
+    flex: none;
+    padding: 20px 15px;
   }
 }

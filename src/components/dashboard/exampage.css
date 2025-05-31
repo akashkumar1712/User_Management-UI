@@ -1,141 +1,178 @@
 .exam-container {
-    display: flex;
-    height: 100vh;
-  }
-  
-  .sidebar {
-    width: 80px;
-    padding: 10px;
-    overflow-y: auto;
-    border-right: 1px solid #ccc;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .sidebar button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-    background-color: #f6f4f4;
-    border: 1px solid #231a1a;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    user-select: none;
-    color: black;
-  }
-  
-  .sidebar button.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #0056b3;
-  }
-  
-  .timer-box {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #f0f0f0;
-    padding: 6px 12px;
-    border-radius: 6px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    user-select: none;
-  }
-  
-  .blinking {
-    animation: blink 1s step-start 0s infinite;
-    background-color: #ffcccc !important;
-    color: #d00000 !important;
-    font-weight: bold;
-  }
-  
-  @keyframes blink {
-    50% {
-      opacity: 0;
-    }
-  }
-  
-  .question-buttons {
-    margin-top: 20px;
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-    width: 100%;
-  }
-  
-  .next-small-btn {
-    padding: 6px 12px;
-    font-size: 14px;
-    border-radius: 4px;
-    border: 1px solid #007bff;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    user-select: none;
-    width: 80px;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-  }
-  
-  .next-small-btn:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-  }
-  
-  .submit-btn {
-    padding: 6px 16px;
-    font-size: 14px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    user-select: none;
-    min-width: 120px;
-    max-width: 250px;
-    text-align: center;
-    margin: 0 auto;
-    display: block;
-    transition: background-color 0.2s ease;
-  }
-  
-  .submit-btn:hover {
-    background-color: #218838;
-  }
-  
-  /* Custom radio styles */
-  .custom-radio {
-    position: absolute;
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+.sidebar {
+  width: 80px;
+  padding: 10px;
+  overflow-y: auto;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  background-color: #f6f4f4;
+  border: 1px solid #231a1a;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  user-select: none;
+  color: black;
+}
+
+.sidebar button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+.top-bar {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Increased gap for spacing */
+  z-index: 1000;
+}
+
+.submit-btn {
+  padding: 6px 16px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  min-width: 120px;
+  transition: background-color 0.2s ease;
+}
+
+.submit-btn:disabled {
+  background-color: #94d3a2;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.timer-box {
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  user-select: none;
+}
+
+.blinking {
+  animation: blink 1s step-start 0s infinite;
+  background-color: #ffcccc !important;
+  color: #d00000 !important;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  50% {
     opacity: 0;
-    width: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
   }
-  
-  .radio-letter {
-    width: 28px;
-    height: 28px;
-    border: 2px solid #666;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: #666;
-    background-color: white;
-    transition: all 0.3s ease;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    margin-right: 10px;
-  }
-  
-  .custom-radio:checked + label .radio-letter {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: white;
-  }
-  
+}
+
+.question-box {
+  flex: 1;
+  padding: 20px;
+  margin: 80px 20px 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.option-row {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.custom-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.radio-letter {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #666;
+  background-color: white;
+  transition: all 0.3s ease;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.custom-radio:checked + label .radio-letter {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.question-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+.next-small-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #007bff;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  width: 80px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.next-small-btn:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}

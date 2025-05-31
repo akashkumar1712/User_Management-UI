@@ -25,7 +25,8 @@ function Layout() {
   const location = useLocation();
   const isAuthRoute = location.pathname === '/auth';
   const isExamRoute = location.pathname.startsWith('/exam');
-  const shouldHideNavbar = isExamRoute;
+  const isDashBoard = location.pathname === '/dashboard'
+  const shouldHideNavbar = isExamRoute || isAuthRoute || isDashBoard;
   const isAdmin = UsersService.adminOnly();
 
   return (

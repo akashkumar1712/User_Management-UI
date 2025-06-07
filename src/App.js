@@ -20,6 +20,8 @@ import StudyMaterialsPage from './components/dashboard/StudyMaterialsPage';
 import ExamPage from './components/dashboard/ExamPage';
 import ResultPage from './components/dashboard/ResultPage';
 import UsersService from './components/service/UsersService';
+import AIAssistant from './components/ai/AIAssistant'; // adjust path as needed
+
 
 function Layout() {
   const location = useLocation();
@@ -44,6 +46,7 @@ function Layout() {
           <Route path="/materials/:subject/:type" element={<StudyMaterialsPage />} />
           <Route path="/exam/:type/:course" element={<ExamPage />} />
           <Route path="/result" element={<ResultPage />} />
+          <Route path="/ai" element={<AIAssistant />} />
           <Route path="/profile" element={<ProfilePage />} />
 
           {/* Admin-only routes */}

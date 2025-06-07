@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './dashboard.css';
+import AIAssistant from "../ai/AIAssistant"; // adjust the path if needed
+
+
 
 function Dashboard({ profile }) {
   const navigate = useNavigate();
@@ -63,6 +66,7 @@ function Dashboard({ profile }) {
           )}
         </div>
       </div>
+      
 
       <div className="section">
         <label htmlFor="course-select">Select Course:</label>

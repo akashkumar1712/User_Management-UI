@@ -24,12 +24,13 @@ function Navbar() {
         <li><Link to="/auth">Exam</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to="/team">Team</Link></li>
-        
-        
+        <li><Link to="/ai">AI Assistant</Link></li> {/* 🧠 AI Button */}
+
         <div className="login-btn">
-            <a href="/auth">Login</a>
+          <a href="/auth">Login</a>
         </div>
 
+        {/* Uncomment as needed */}
         {/* {isAuthenticated && <li><Link to="/profile">Profile</Link></li>} */}
         {/* {isAdmin && <li><Link to="/admin/user-management">User Management</Link></li>} */}
         {/* {isAuthenticated && <li><button onClick={handleLogout}>Logout</button></li>} */}

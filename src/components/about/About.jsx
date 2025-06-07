@@ -14,6 +14,9 @@ const About = () => {
         </div>
       </header>
 
+
+      
+
       <section className="mission-section">
         <h2>Our Mission</h2>
         <p>

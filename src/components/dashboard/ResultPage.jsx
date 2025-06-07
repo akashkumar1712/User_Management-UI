@@ -32,7 +32,7 @@ function ResultPage() {
 
     const token = localStorage.getItem('authToken');
 
-    fetch('http://localhost:1010/api/exams/submit', {
+    fetch('https://edutech-login-backend.onrender.com/api/exams/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

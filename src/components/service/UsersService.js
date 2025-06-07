@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class UsersService {
-    static BASE_URL = "http://localhost:1010"
+    static BASE_URL = "https://edutech-login-backend.onrender.com"
 
     // static async login(email, password){
     //     try{

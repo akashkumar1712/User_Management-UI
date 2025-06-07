@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:1010/api/courses'; // adjust base URL as per your backend
+const API_BASE = 'https://edutech-login-backend.onrender.com/api/courses'; // adjust base URL as per your backend
 
 // Get all courses (used in Dashboard for dropdown)
 const getAllCourses = async () => {

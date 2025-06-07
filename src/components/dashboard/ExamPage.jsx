@@ -13,7 +13,7 @@ function ExamPage() {
 
   useEffect(() => {
     const count = 50;
-    fetch(`http://localhost:1010/api/exams/${type}/${course}?count=${count}`)
+    fetch(`https://edutech-login-backend.onrender.com/api/exams/${type}/${course}?count=${count}`)
       .then(res => res.json())
       .then(data => {
         if (data && data.success && Array.isArray(data.data)) {
@@ -81,7 +81,7 @@ function ExamPage() {
       answerOptionId: answers[q.id] || null,
     }));
 
-    fetch('http://localhost:1010/api/exams/submit', {
+    fetch('https://edutech-login-backend.onrender.com/api/exams/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ answers: payload }),

@@ -27,7 +27,7 @@ function AIAssistant() {
     setError(null);
 
     try {
-      const res = await fetch("http://localhost:1010/api/ai/chat", {
+      const res = await fetch("https://edutech-login-backend.onrender.com/api/ai/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

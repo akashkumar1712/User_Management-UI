@@ -13,6 +13,7 @@ function ExamPage() {
 
   useEffect(() => {
     const count = 50;
+    //fetch(`https://edutech-login-backend.onrender.com/api/exams/${type}/${course}?count=${count}`)
     fetch(`https://edutech-login-backend.onrender.com/api/exams/${type}/${course}?count=${count}`)
       .then(res => res.json())
       .then(data => {

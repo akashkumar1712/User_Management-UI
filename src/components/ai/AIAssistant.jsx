@@ -27,14 +27,13 @@ function AIAssistant() {
     setError(null);
 
     try {
-      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      const res = await fetch("http://localhost:1010/api/ai/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer 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`,
         },
         body: JSON.stringify({
-          model: "openai/gpt-3.5-turbo",
+          model: "gpt-3.5-turbo",
           messages: newMessages,
         }),
       });

@@ -53,8 +53,8 @@ body {
 }
 
 .auth-page .video-overlay-text p {
+  margin-bottom: 10px;
   color: white !important;
-  margin: 0 0 10px 0;
 }
 
 /* Right Auth Form Section */
@@ -176,6 +176,15 @@ body {
 
 .password-wrapper button:hover {
   color: #fb8c00;
+}
+
+/* Error Message */
+.error-msg {
+  color: #d32f2f;
+  font-size: 13px;
+  margin-top: -12px;
+  margin-bottom: 12px;
+  padding-left: 12px;
 }
 
 /* Submit Button */

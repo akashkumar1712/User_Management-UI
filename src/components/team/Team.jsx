@@ -7,13 +7,7 @@ const teamMembers = [
     role: "Full Stack Developer, Co-founder",
     image:
       "https://static.vecteezy.com/system/resources/previews/022/977/075/non_2x/line-icon-for-founder-vector.jpg",
-  },
-  {
-    name: "Amit Saini",
-    role: "Frontend Developer, Co-founder",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/022/977/075/non_2x/line-icon-for-founder-vector.jpg",
-  },
+  }
 ];
 
 export default function Team() {
